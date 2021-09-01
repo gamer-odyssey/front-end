@@ -43,3 +43,6 @@ What are your stretch goals? We would want to find a way to incorporate a calend
 
 > ### **Non-functional requirements**
 
+1. **Security**: With us wanting to force a user to login with Auth0 we will be limited on what we can change regarding the auth0 process. Any code we get from them we won’t be adjusting much beyond token id’s and secret keys. This will allow us to help authenticate users and make sure that you are only seeing your own games. The benefits for this outway the need or ability to write all the auth code from scratch.
+
+2. **Testability** - Testability will be limited due to the time constraints of this project. We will also not be writing any code that will be checking this due to our current skills. So our tests will strictly be based off what the 4 of us can physically do with our limited time. We will plan on testing this as we can as we go!
