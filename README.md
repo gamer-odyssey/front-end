@@ -13,6 +13,8 @@ Gaming Odyssey is an application that allows people to plan ahead for upcoming g
 
 ### Wireframes
 
+![Screen Shot 2021-08-31 at 9 52 01 PM](https://user-images.githubusercontent.com/81946031/131613987-4d6a6319-43b3-4aed-9ef1-44b8e0f3d4d3.png)
+
 
 ### **User Stories**
 
