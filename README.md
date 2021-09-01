@@ -30,4 +30,4 @@ We hope to use this GameSchema to create our database to allow games you are int
 
 >### **API Info**
 <!-- Add API info file links below -->
-
+We are using [IGDB.com](https://api-docs.igdb.com/) API to request external data on upcoming video games.
