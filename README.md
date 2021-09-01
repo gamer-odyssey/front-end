@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Software Requirements
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> ## **Vision**
 
-## Available Scripts
+1. What is the vision of this product?
+- This product will give people to have a place to schedule upcoming gaming releases, this vision was aligned with people wanting a site that would give them insights of their favorite upcoming games. Additionally, gaming is a huge part of society, big inlfuences of culture including gaming conventions, streamers, and pop culture like Fortnite.
 
-In the project directory, you can run:
+2. What pain point does this project solve?
+- The biggest pain point that all gamers have is finding time to know what future games are coming to a console that they enjoy. This also allows the user to see the schedule for future games that are coming up to make plans or write notes of what they plan on doing once the game gets close to release.
 
-### `npm start`
+3. Why should we care about your product?
+- Everyone at some level likes to be entertained, the other thing that everyone can be on board with is having some way to organize their entertainment. What this does is give people a way to organize their entertainment, specifically games, into a well formatted user experience. This will have forms and Auth0 as ways to add some user privacy but complexity that makes this truly impressive for any type of gamer. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> ### **Scope**
+- IN 
+The web app will provide information about new video games that are about to be released.
+Users will be able to search for new releases
+The web app will provide a photo, description, and the release date of the video game.
+Users can select the game from the search result and move it to their favorite list.
+Users are able to update their lists by adding notes for each game.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- OUT
+Users will not be able to buy games from our web app.
 
-### `npm test`
+> ### **Functional Requirements**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Users can log in into the apps using their Gmail accounts.
+2. Users can search for the upcoming video games.
+3. Users can select and save games to their wish list.
+4. Users can add and update personal notes for the games.
+5. Users can delete games from the list.
 
-### `npm run build`
+> **Minimum Viable Product vs What will your MVP functionality be?**
+- MVP will be for a user to be able to successfully login to the site using a two be decided auth provider. The user should then be able to search through a list of 10 upcoming video games and be able to add those games to a database if they are interested in the game. Once added the user will be able to edit a notes section if they have any cool info they want to add. The user will also be able to delete these entries if they are not interested in that game.
+What are your stretch goals? We would want to find a way to incorporate a calendar that would show the games you have selected instead of a list. We also would be interested in looking to expand the search to include more games if we can find a way to do that. 
+> *Stretch*
+- What stretch goals are you going to aim for? We would be looking to start with the the calendar and how we go about actually incorporating that in since none of use have done any sort of calendar before.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> ### **Data flow**
+![301-flowchart](https://user-images.githubusercontent.com/81946031/131468214-1de59b74-ad66-47f5-8f67-45cb9d46fdd8.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+> ### **Non-functional requirements**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Security: With us wanting to force a user to login with Auth0 we will be limited on what we can change regarding the auth0 process. Any code we get from them we won’t be adjusting much beyond token id’s and secret keys. This will allow us to help authenticate users and make sure that you are only seeing your own games. The benefits for this outway the need or ability to write all the auth code from scratch.   
+Testability - Testability will be limited due to the time constraints of this project. We will also not be writing any code that will be checking this due to our current skills. So our tests will strictly be based off what the 4 of us can physically do with our limited time. We will plan on testing this as we can as we go! 
