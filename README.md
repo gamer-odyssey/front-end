@@ -20,6 +20,10 @@ Gaming Odyssey is an application that allows people to plan ahead for upcoming g
 
 Click [HERE](https://trello.com/b/OaAQVuO2/301-group-project) to view user stories under User Stories card in Trello
 
+### Software Requirements
+
+click [HERE](./requirements.md) to view software requirements
+
 ### **Domain Modeling**  
 ![Project Prep 4 UMI](https://user-images.githubusercontent.com/81712870/131445376-37b0d612-6e0f-4c58-b8ba-dc68333e2a3d.png).  
 
