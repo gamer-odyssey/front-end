@@ -1,47 +1,50 @@
-# Software Requirements
+This is our group project frontend repo
 
-> ## **Vision**
+Description: Gaming Odyssey is an application that allows people to plan ahead for upcoming game releases. Have you ever wanted to archive a date where you planned for a video game release that you have been anticipating for a long time? Well game Oddyssey will give you that piece of mind so that you can catalog upcoming games by giving you information about whe the game would be released, title of the game, and a calendar that will show you upcoming game releases that you the user have saved. The best part is that this will be associated with your own account which will show you specific data according to your own unique user account that will authorize you to access the site. So please come and indulge in some planning of future game releases that will help you stay organized with your gaming experience!
 
-1. What is the vision of this product?
-- This product will give people to have a place to schedule upcoming gaming releases, this vision was aligned with people wanting a site that would give them insights of their favorite upcoming games. Additionally, gaming is a huge part of society, big inlfuences of culture including gaming conventions, streamers, and pop culture like Fortnite.
+### **Group Members**
 
-2. What pain point does this project solve?
-- The biggest pain point that all gamers have is finding time to know what future games are coming to a console that they enjoy. This also allows the user to see the schedule for future games that are coming up to make plans or write notes of what they plan on doing once the game gets close to release.
+1. Alex Payne,
 
-3. Why should we care about your product?
-- Everyone at some level likes to be entertained, the other thing that everyone can be on board with is having some way to organize their entertainment. What this does is give people a way to organize their entertainment, specifically games, into a well formatted user experience. This will have forms and Auth0 as ways to add some user privacy but complexity that makes this truly impressive for any type of gamer. 
+1. Ayrat Gimranov,  
 
-> ### **Scope**
-- IN 
-The web app will provide information about new video games that are about to be released.
-Users will be able to search for new releases
-The web app will provide a photo, description, and the release date of the video game.
-Users can select the game from the search result and move it to their favorite list.
-Users are able to update their lists by adding notes for each game.
+1. Connor Boyce,
 
-- OUT
-Users will not be able to buy games from our web app.
+>### **Project Prep**  
+<!-- Add Project Prep file links below -->
 
-> ### **Functional Requirements**
+1. [project-prep-1](Project-Prep/project-prep-1.md)
 
-1. Users can log in into the apps using their Gmail accounts.
-2. Users can search for the upcoming video games.
-3. Users can select and save games to their wish list.
-4. Users can add and update personal notes for the games.
-5. Users can delete games from the list.
+1. [project-prep-2](Project-Prep/project-prep-2.md)
 
-> **Minimum Viable Product vs What will your MVP functionality be?**
-- MVP will be for a user to be able to successfully login to the site using a two be decided auth provider. The user should then be able to search through a list of 10 upcoming video games and be able to add those games to a database if they are interested in the game. Once added the user will be able to edit a notes section if they have any cool info they want to add. The user will also be able to delete these entries if they are not interested in that game.
-What are your stretch goals? We would want to find a way to incorporate a calendar that would show the games you have selected instead of a list. We also would be interested in looking to expand the search to include more games if we can find a way to do that. 
-> *Stretch*
-- What stretch goals are you going to aim for? We would be looking to start with the the calendar and how we go about actually incorporating that in since none of use have done any sort of calendar before.
+1. [project-prep-3](Project-Prep/project-prep-3.md)
+
+#### **Project Prep 3**  
+**UMI**  
+![Project Prep 4 UMI](https://user-images.githubusercontent.com/81712870/131445376-37b0d612-6e0f-4c58-b8ba-dc68333e2a3d.png).  
+**User Stories**: https://trello.com/b/OaAQVuO2/301-group-project
 
 
-> ### **Data flow**
-![301-flowchart](https://user-images.githubusercontent.com/81946031/131468214-1de59b74-ad66-47f5-8f67-45cb9d46fdd8.png)
+**GameSchema**  
+![GameSchema](https://user-images.githubusercontent.com/81712870/131456484-e3f71e8d-7abb-45ac-a523-e488e859c2e0.png)
+This collection would be a single collection not assocaited with another! 
+We hope to use this GameSchema to create our database to allow games you are intrested in to be stored and show to you. 
 
+>### **Individual Features Worked On**
+<!-- Add feature log file links  -->
 
-> ### **Non-functional requirements**
+#### **ALEX**
 
-Security: With us wanting to force a user to login with Auth0 we will be limited on what we can change regarding the auth0 process. Any code we get from them we won’t be adjusting much beyond token id’s and secret keys. This will allow us to help authenticate users and make sure that you are only seeing your own games. The benefits for this outway the need or ability to write all the auth code from scratch.   
-Testability - Testability will be limited due to the time constraints of this project. We will also not be writing any code that will be checking this due to our current skills. So our tests will strictly be based off what the 4 of us can physically do with our limited time. We will plan on testing this as we can as we go! 
+[My contributions](Feature-Log-Folder/Alex-Feature-Folder/Feature-log.md)
+
+#### **AYRAT**
+
+[My contributions](Feature-Log-Folder/Ayrat-Feature-Folder/Feature-log.md)
+
+#### **CONNOR**
+
+[My contributions](Feature-Log-Folder/Connor-Feature-Folder/Feature-log.md)
+
+>### **API Info**
+<!-- Add API info file links below -->
+
