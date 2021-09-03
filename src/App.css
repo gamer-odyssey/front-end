@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+.listLine {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;  
+}
+
+.listLine img {
+  object-fit: fill;
+}
+
+.summary{
+  display: flex;
+  gap: 20px;  
+}
+
+.platformsUl {
+  min-width: 15rem;
+}
+
+.summary div ul li {
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
