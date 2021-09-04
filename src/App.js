@@ -17,11 +17,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       comingSoon: [],
-      offset: 0
+      offset: 0,
+      games: [],
     }
   };
 
-// sends request to server to get the list of upcoming games, and passes offset as a query (initially 0)
+  // sends request to server to get the list of upcoming games, and passes offset as a query (initially 0)
   getComingSoon = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_SERVER}/coming_soon?offset=${this.state.offset}`);
@@ -34,7 +35,7 @@ class App extends React.Component {
     }
   }
 
-// increases offset by 10, and then calls the above function again,  
+  // increases offset by 10, and then calls the above function again,  
   nextPage = async () => {
     await this.setState({
       offset: this.state.offset + 10
@@ -42,7 +43,7 @@ class App extends React.Component {
     this.getComingSoon();
   }
 
-// decreases offset by 10
+  // decreases offset by 10
   previousPage = async () => {
     await this.setState({
       offset: this.state.offset - 10
@@ -50,8 +51,47 @@ class App extends React.Component {
     this.getComingSoon();
   }
 
-  render() {
 
+  //For Auht0 once we're ready
+  // componentDidMount = asynce () => {
+  //   try {
+  //     const {  }
+  //   }
+  // }
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+  }
+
+  handleNewGame = async (addedGame) => {
+    console.log('addedGame:', addedGame);
+    
+    let timestamp = addedGame.first_release_date * 1000; // multiplying by 1000 to convet timestamp from API (in secinds) to Javascript epoch time (in millisecinds)
+
+    let dateObject = new Date(timestamp); // converting timestamp into Date object
+
+    let dateHuman = `${dateObject.toLocaleString('default', { month: 'short' })} ${dateObject.getDate()}, ${dateObject.getFullYear()}`;
+
+    let config = {
+      title: addedGame.name,
+      email: 'delightingreen@gmail.com',
+      releaseDate: dateHuman,
+      note: 'Testing Note',  
+    }
+    try {
+      let response = await axios.post('http://localhost:3001/gamelist', config);
+      console.log(response);
+      const newGame = response.data
+      this.setState({
+        games: [...this.state.games, newGame]
+      })
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+
+  render() {
+    console.log('gameinfo :', this.state.games);
     let comingSoonToRender = this.state.comingSoon.map((game, idx) => {
       let timestamp = game.first_release_date * 1000; // multiplying by 1000 to convet timestamp from API (in secinds) to Javascript epoch time (in millisecinds)
 
@@ -63,8 +103,8 @@ class App extends React.Component {
 
       let platforms = game.platforms.map((platform, idx) => <li key={idx}>{platform.name}</li>);
       let summary = game.summary;
-
       //this return belongs to map method
+
       return <ListGroup.Item key={idx}>
         <section className="listLine">
           <img alt="cover" src={imgUrl} />
@@ -84,6 +124,9 @@ class App extends React.Component {
               </div>
             </section>
           </div>
+          <footer>
+            <Button variant="primary" onClick={() => this.handleNewGame(game)}>Add Game</Button>
+          </footer>
         </section>
       </ListGroup.Item>
     })
