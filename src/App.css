@@ -61,3 +61,8 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.titleButtonGroup {
+  display: flex;
+  justify-content: space-between;
+}
