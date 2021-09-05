@@ -13,7 +13,7 @@ class Header extends React.Component {
           <Navbar.Brand href='/'>The Gaming Odyssey</Navbar.Brand>
           <Nav>
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/odyssey">Odysseys</Nav.Link>
+            <Nav.Link href="/odyssey">Wish List</Nav.Link>
             <Nav.Link href="/about-us">About Us</Nav.Link>
             {this.props.isAuthenticated ?
               <LogoutButton />

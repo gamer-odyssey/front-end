@@ -27,7 +27,7 @@ class GameFormUpdate extends React.Component {
     return(
       <Container>
         <Form onSubmit={this.handleSubmit}>
-          <Form.Label><h2>Update a Game Note</h2></Form.Label>
+          <Form.Label></Form.Label>
           <Form.Group controlId="note">
             <Form.Control type='text' onChange={this.handleNote} value={this.state.note}/>
           </Form.Group>
