@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import UpcomingLoggedOut from './UpcomingLoggedOut.js';
 
+
 const server = process.env.REACT_APP_SERVER
 
 class HomePage extends React.Component {
