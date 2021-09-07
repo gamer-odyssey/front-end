@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import UpcomingLoggedOut from './UpcomingLoggedOut.js';
 
-const deployed_server = process.env.DEPLOYED_REACT_APP_SERVER
+const deployed_server = process.env.REACT_APP_SERVER_DEPLOYED
 
 
 class HomePage extends React.Component {
