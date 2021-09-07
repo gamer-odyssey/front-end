@@ -12,7 +12,6 @@ import {
 import Upcoming from './Upcoming.js';
 
 const deployed_server = process.env.DEPLOYED_REACT_APP_SERVER
-// const local_server = process.env.REACT_APP_SERVER
 
 class HomePage extends React.Component {
 
