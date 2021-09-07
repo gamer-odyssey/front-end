@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+.listLine {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;  
+}
+
+.listLine img {
+  object-fit: fill;
+}
+
+.summary{
+  display: flex;
+  gap: 20px;  
+}
+
+.platformsUl {
+  padding-left: 3px;
+}
+
+.platformsLi {    
+  white-space: nowrap;
+}
+
+.titleButtonGroup {
+  display: flex;
+  justify-content: space-between; 
+}
+
