@@ -9,8 +9,7 @@ import {
 } from "react-router-dom";
 import UpcomingLoggedOut from './UpcomingLoggedOut.js';
 
-const deployed_server = process.env.DEPLOYED_REACT_APP_SERVER
-const local_server = process.env.REACT_APP_SERVER
+const server = process.env.REACT_APP_SERVER
 
 class HomePage extends React.Component {
 
@@ -29,7 +28,7 @@ class HomePage extends React.Component {
 
   getComingSoon = async () => {
     try {
-      const response = await axios.get(`${deployed_server}/coming_soon?offset=${this.state.offset}`);
+      const response = await axios.get(`${server}/coming_soon?offset=${this.state.offset}`);
       this.setState({
         comingSoon: response.data,
         finishedLoading: true

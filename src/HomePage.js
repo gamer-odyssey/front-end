@@ -11,8 +11,7 @@ import {
 } from "react-router-dom";
 import Upcoming from './Upcoming.js';
 
-const deployed_server = process.env.DEPLOYED_REACT_APP_SERVER
-const local_server = process.env.REACT_APP_SERVER
+const server = process.env.REACT_APP_SERVER
 
 class HomePage extends React.Component {
 
@@ -28,7 +27,7 @@ class HomePage extends React.Component {
 
   getComingSoon = async () => {
     try {
-      const response = await axios.get(`${deployed_server}/coming_soon?offset=${this.state.offset}`);
+      const response = await axios.get(`${server}/coming_soon?offset=${this.state.offset}`);
       this.setState({
         comingSoon: response.data,
         finishedLoading: true
@@ -66,7 +65,7 @@ class HomePage extends React.Component {
       params: { email: this.props.auth0.user.email },
     };
     try {
-      let response = await axios.get(`${deployed_server}/gamelist`, config);
+      let response = await axios.get(`${server}/gamelist`, config);
       console.log(response.data);
       this.setState({
         wishlist: response.data
@@ -89,7 +88,7 @@ class HomePage extends React.Component {
       note: ''
     }
     try {
-      let response = await axios.post(`${deployed_server}/gamelist`, config);
+      let response = await axios.post(`${server}/gamelist`, config);
       console.log(response);
       const newGame = response.data
       this.setState({
@@ -109,7 +108,7 @@ class HomePage extends React.Component {
         headers: { "Authorization": `Bearer ${jwt}` },
         params: { email: this.props.auth0.user.email },
       };
-      await axios.delete(`${deployed_server}/gamelist/${id}`, config);
+      await axios.delete(`${server}/gamelist/${id}`, config);
       let remainingGames = this.state.wishlist.filter(game => game._id !== id);
       this.setState({wishlist: remainingGames});
     } catch (err) {
@@ -132,7 +131,7 @@ class HomePage extends React.Component {
     };
 
     try {
-      await axios.put(`${deployed_server}/gamelist/${game._id}`, config);
+      await axios.put(`${server}/gamelist/${game._id}`, config);
       const updateWishList = this.state.wishlist.map(stateGame => {
         if (stateGame._id === game._id) {
           return game
