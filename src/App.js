@@ -4,6 +4,7 @@ import './App.css';
 import HomePage from './HomePage.js';
 import Header from './Header';
 import Container from 'react-bootstrap/Container';
+import MainLoggedOut from './MainLoggedOut';
 
 class App extends React.Component {
   render() {
@@ -21,10 +22,12 @@ class App extends React.Component {
         <>
           <Header isAuthenticated={isAuthenticated} />
           {isAuthenticated ?
-            <Container>
+            <Container fluid="xl">
               <HomePage />
             </Container>
-            : <Container><h2>Please login to use the app</h2></Container>
+            : <Container>
+              <MainLoggedOut />
+            </Container>
           }
         </>
       );

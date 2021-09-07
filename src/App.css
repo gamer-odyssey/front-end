@@ -53,17 +53,15 @@
 }
 
 .platformsUl {
-  min-width: 15rem;
+  padding-left: 3px;
 }
 
-.summary div ul li {
-    overflow: hidden; 
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.platformsLi {    
+  white-space: nowrap;
 }
 
 .titleButtonGroup {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
 }
 
