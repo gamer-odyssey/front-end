@@ -71,7 +71,6 @@ class Wishlist extends React.Component {
       </>
     )
   }
-
 }
 
 export default withAuth0(Wishlist);

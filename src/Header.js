@@ -11,14 +11,18 @@ class Header extends React.Component {
       <Navbar bg="secondary" variant="dark" expand="sm">
         <Container>
           <Navbar.Brand href='/'>The Gaming Odyssey</Navbar.Brand>
-          <Nav>
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/odyssey">Wish List</Nav.Link>
-            <Nav.Link href="/about-us">About Us</Nav.Link>
-            {this.props.isAuthenticated ?
-              <LogoutButton />
-              : <LoginButton />}
-          </Nav>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ml-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/odyssey">Wish List</Nav.Link>
+              <Nav.Link href="/profile">Profile</Nav.Link>
+              <Nav.Link href="/about-us">About Us</Nav.Link>
+              {this.props.isAuthenticated ?
+                <LogoutButton />
+                : <LoginButton />}
+            </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     )
