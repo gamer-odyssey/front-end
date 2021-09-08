@@ -10,6 +10,7 @@ import {
   Route,
 } from "react-router-dom";
 import Upcoming from './Upcoming.js';
+import About from './about.js'
 
 
 const server = process.env.REACT_APP_SERVER
@@ -251,7 +252,7 @@ class HomePage extends React.Component {
             />
           </Route>
           <Route exact path="/about-us">
-            <h1>About the Gaming Odyssey Team</h1>
+            <About />
           </Route>
           <Route exact path="/odyssey">
             <Wishlist
