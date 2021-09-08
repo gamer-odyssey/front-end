@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Spinner, ListGroup, Col, Row } from 'react-bootstrap';
+import { Button, Spinner, ListGroup, Col, Row, InputGroup, Form } from 'react-bootstrap';
 
 class UpcomingLoggedOut extends React.Component {
 
@@ -23,16 +23,16 @@ class UpcomingLoggedOut extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs="3" sm="3" md="2" lg="2" xl="2" className="mb-2" style={{ minWidth: "200px" }}>
-            <img alt="cover" src={imgUrl} />
+          <Col xs="12" sm="3" md="2" lg="2" xl="2" className="mb-2 text-center" style={{ minWidth: "200px" }}>
+            <img className="mt-2" alt="cover" src={imgUrl} />
           </Col>
-          <Col xs={true} sm="3" md="2" lg="2" xl="2" style={{ minWidth: "fit-content" }}>
+          <Col xs="12" sm="3" md="2" lg="2" xl="2" style={{ minWidth: "fit-content" }}>
             <ul className="platformsUl">
               <h5>Platforms</h5>
               {platforms}
             </ul>
           </Col>
-          <Col xs="auto" sm="auto" md={true} lg={true} xl="7" >
+          <Col className="d-none d-sm-block" sm="auto" md={true} lg={true} xl="7" >
             <h5>Summary:</h5>
             <p>{game.summary}</p>
           </Col>
@@ -44,26 +44,63 @@ class UpcomingLoggedOut extends React.Component {
       <>
         <h1>Welcome to The Gaming Odyssey</h1>
         <p>Here, you can look through all of the upcoming video games and add them to your personal wish list</p>
-        <h5>Please login to see your wish list!</h5>
+        <h6>Please login to see your wish list!</h6>
+        {/* <Form className="search-form" onSubmit={this.props.handleSubmit}>
+          <InputGroup>
+            <Form.Control
+              className="search-input"
+              type="text"
+              placeholder="Search..."
+              name="search"
+              onChange={this.props.handleChange}
+              autoComplete="off"
+            />
+            <InputGroup.Append>
+              <Button type="submit">
+                Search Upcoming
+              </Button>
+            </InputGroup.Append>
+          </InputGroup>
+        </Form> */}
+
+        <Form className="mb-4 mt-4" onSubmit={this.props.handleSubmit}>
+          <InputGroup>
+            <Form.Control
+              size="md"
+              className="input"
+              placeholder="Search..."
+              onChange={this.props.handleChange}>
+            </Form.Control>
+            <InputGroup.Append>
+              <Button variant="primary" type="submit">Search for Upcoming</Button>
+            </InputGroup.Append>
+          </InputGroup>
+        </Form>
+
         {this.props.comingSoon.length !== 0 ?
           <>
+            <div className="text-center">
+              <Button onClick={this.props.handleShowAll} variant="success">Show All Upcoming Games</Button>
+            </div>
             <div className="text-right">
               {this.props.finishedLoading ? '' : <Spinner animation="border" variant="success" size="sm" />}
               {' '}
               <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.previousPage} disabled={this.props.offset > 0 ? false : true} >Previous Page</Button>
               {' '}
-              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.nextPage}>Next Page</Button>
+              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.nextPage} disabled={this.props.comingSoon.length < 10 ? true : false} >Next Page</Button>
             </div>
             <ListGroup>
               {comingSoonToRender}
             </ListGroup>
             <div className="text-right">
-              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.previousPage} disabled={this.props.offset > 0 ? false : true} >Previous Page</Button>
+              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.previousPage} disabled={this.props.offset > 0 ? false : true}>Previous Page</Button>
               {' '}
-              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.nextPage}>Next Page</Button>
+              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.nextPage} disabled={this.props.comingSoon.length < 10 ? true : false}>Next Page</Button>
             </div>
           </>
-          : <div style={{ textAlign: "center" }}><Spinner animation="border" variant="success" /></div>}
+          : this.props.returnedEmptySearch === false
+            ? <div style={{ textAlign: "center" }}><Spinner animation="border" variant="success" /></div>
+            : <h5>Search returned empty. Check your spelling or search for a different game</h5>}
       </>
     )
   }
