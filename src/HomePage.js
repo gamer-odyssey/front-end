@@ -22,17 +22,35 @@ class HomePage extends React.Component {
       comingSoon: [],
       wishlist: [],
       offset: 0,
-      finishedLoading: false
+      finishedLoading: false,
+      returnedEmptySearch: false,
+      searchInput: '',
+      showOnlySearchResults: false
     }
   };
+
+  handleChange = (e) => {
+    this.setState({
+      searchInput: e.target.value
+    })
+    console.log(this.state.searchInput)
+  }
 
   getComingSoon = async () => {
     try {
       const response = await axios.get(`${server}/coming_soon?offset=${this.state.offset}`);
-      this.setState({
-        comingSoon: response.data,
-        finishedLoading: true
-      })
+
+      if (response.data.length > 0) {
+        this.setState({
+          comingSoon: response.data,
+          finishedLoading: true
+        })
+      } else {
+        this.setState({
+          finishedLoading: true,
+          returnedEmptySearch: true
+        })
+      }
       console.log(response.data);
     } catch (err) {
       console.log(err.message);
@@ -44,7 +62,11 @@ class HomePage extends React.Component {
       offset: this.state.offset + 10,
       finishedLoading: false
     });
-    this.getComingSoon();
+    if (this.state.showOnlySearchResults) {
+      this.getSearchResults();
+    } else {
+      this.getComingSoon();
+    }
     window.scrollTo(0, 0);
   }
 
@@ -53,7 +75,11 @@ class HomePage extends React.Component {
       offset: this.state.offset - 10,
       finishedLoading: false
     });
-    this.getComingSoon();
+    if (this.state.showOnlySearchResults) {
+      this.getSearchResults();
+    } else {
+      this.getComingSoon();
+    };
     window.scrollTo(0, 0);
   }
 
@@ -74,7 +100,66 @@ class HomePage extends React.Component {
     } catch (error) {
       console.log(error.response);
     }
-    this.getComingSoon();
+    if (this.state.showOnlySearchResults) {
+      this.getSearchResults();
+    } else {
+      this.getComingSoon();
+    }
+  }
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    await this.setState({
+      returnedEmptySearch: false,
+      finishedLoading: false
+    })
+    if (this.state.searchInput.length === 0) {
+      await this.setState({
+        showOnlySearchResults: false,
+        offset: 0
+      })
+      this.getComingSoon()
+    } else {
+      await this.setState({
+        offset: 0,
+        showOnlySearchResults: true
+      })
+      this.getSearchResults();
+    }
+  }
+
+  getSearchResults = async () => {
+    let todaysDate = Math.floor(Date.now() / 1000);
+    let field = `fields name, summary, platforms.name, first_release_date, cover.image_id; where first_release_date > ${todaysDate}; offset ${this.state.offset}; limit 10; search "${this.state.searchInput}";`;
+    try {
+      const response = await axios.get(`${server}/search?field=${field}`);
+      if (response.data.length > 0) {
+        this.setState({
+          comingSoon: response.data,
+          finishedLoading: true,
+          returnedEmptySearch: false
+        })
+      } else {
+        this.setState({
+          comingSoon: response.data,
+          finishedLoading: true,
+          returnedEmptySearch: true
+        })
+      }
+      console.log(response.data);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  handleShowAll = async () => {
+    await this.setState({
+      finishedLoading: false,
+      returnedEmptySearch: false,
+      offset: 0,
+      showOnlySearchResults: false,
+    })
+    this.getComingSoon()
   }
 
   handleNewGame = async (addedGame) => {
@@ -111,7 +196,7 @@ class HomePage extends React.Component {
       };
       await axios.delete(`${server}/gamelist/${id}`, config);
       let remainingGames = this.state.wishlist.filter(game => game._id !== id);
-      this.setState({wishlist: remainingGames});
+      this.setState({ wishlist: remainingGames });
     } catch (err) {
       console.log(err.response);
     }
@@ -153,12 +238,16 @@ class HomePage extends React.Component {
           <Route exact path="/">
             <Upcoming
               comingSoon={this.state.comingSoon}
-              finishedLoading={this.state.finishedLoading}
               offset={this.state.offset}
-              wishlist={this.state.wishlist}
-              handleNewGame={this.handleNewGame}
+              finishedLoading={this.state.finishedLoading}
+              returnedEmptySearch={this.state.returnedEmptySearch}
               previousPage={this.previousPage}
               nextPage={this.nextPage}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              handleShowAll={this.handleShowAll}
+              wishlist={this.state.wishlist}
+              handleNewGame={this.handleNewGame}
             />
           </Route>
           <Route exact path="/about-us">
