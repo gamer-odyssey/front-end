@@ -12,6 +12,7 @@ import {
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Spinner from 'react-bootstrap/Spinner';
+import About from './About';
 
 class HomePage extends React.Component {
 
@@ -224,7 +225,7 @@ class HomePage extends React.Component {
                 : <div style={{textAlign: "center"}}><Spinner animation="border" variant="success" /></div>}
             </Route>
             <Route exact path="/about-us">
-              <h1>About the Gaming Odyssey Team</h1>
+              <About />
             </Route>
             <Route exact path="/odyssey">
               <Wishlist
