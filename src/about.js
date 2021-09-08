@@ -17,8 +17,6 @@ class About extends React.Component {
               />
               <Card.Text>
                 <h3>Ayrat Gimranov</h3>
-                <img />
-                <img />
                 <p>Hi, my name is Ayrat Gimranov and I am a software developer. I moved to the US as a college student to pursue a career in healthcare. Most recently I worked as RN at UW Medical Center's cardiac surgery and advanced heart failure unit. I became attracted to project-type work and decided to make a career change into tech where I could use previously gained skills such as critical thinking, ability to function under stress, prioritizing and delegation. My Motto is: "We can change the world"!</p>
               </Card.Text>
             </Card.Body>
@@ -31,8 +29,6 @@ class About extends React.Component {
                 alt="Second Slide Profile"
               />
               <Card.Text>
-                <img />
-                <img />
                 <h3>Alex Payne</h3>
                 <p>Hi my name's Alex i'm an upcoming Python Software Dev. Before codefellow I worked at Apple, OfferUp, and even on a presidential campaign. I'm super interested in software development because anyone can really do this with the right tools and training you can literally build something as cool as google....(Lots more time needed for that).
                   I'm focusing on Python development because of how interested I am in machine learning its just so cool having a machine learn its something out of a movie and something I can talk about all day. I'd really love to work as a Machine learning engineer at pretty much any company but google or nasa would be my dream places.
