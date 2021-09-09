@@ -10,7 +10,7 @@ import {
   Route,
 } from "react-router-dom";
 import Upcoming from './Upcoming.js';
-import About from './About.js';
+import About from './about.js';
 
 const server = process.env.REACT_APP_SERVER
 
