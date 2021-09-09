@@ -1,13 +1,11 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
-import './about.css';
+import './About.css';
 
 class About extends React.Component {
   render() {
-    const imageLink = () => {
-
-    }
+    
     return (
       <div class="about-page">
         <h1>About the Gaming Odyssey Team</h1>
