@@ -32,8 +32,7 @@ class HomePage extends React.Component {
   handleChange = (e) => {
     this.setState({
       searchInput: e.target.value
-    })
-    console.log(this.state.searchInput)
+    })    
   }
 
   getComingSoon = async () => {
@@ -51,7 +50,6 @@ class HomePage extends React.Component {
           returnedEmptySearch: true
         })
       }
-      console.log(response.data);
     } catch (err) {
       console.log(err.message);
     }
@@ -93,7 +91,7 @@ class HomePage extends React.Component {
     };
     try {
       let response = await axios.get(`${server}/gamelist`, config);
-      console.log(response.data);
+      console.log(response.data); 
       this.setState({
         wishlist: response.data
       })
@@ -130,7 +128,7 @@ class HomePage extends React.Component {
 
   getSearchResults = async () => {
     let todaysDate = Math.floor(Date.now() / 1000);
-    let field = `fields name, summary, platforms.name, first_release_date, cover.image_id; where first_release_date > ${todaysDate}; offset ${this.state.offset}; limit 10; search "${this.state.searchInput}";`;
+    let field = `fields name, summary, screenshots.image_id, platforms.name, first_release_date, cover.image_id; where first_release_date > ${todaysDate}; offset ${this.state.offset}; limit 10; search "${this.state.searchInput}";`;
     try {
       const response = await axios.get(`${server}/search?field=${field}`);
       if (response.data.length > 0) {
@@ -146,7 +144,6 @@ class HomePage extends React.Component {
           returnedEmptySearch: true
         })
       }
-      console.log(response.data);
     } catch (err) {
       console.log(err.message);
     }
@@ -166,17 +163,21 @@ class HomePage extends React.Component {
     let timestamp = addedGame.first_release_date * 1000;
     let dateObject = new Date(timestamp);
     let dateHuman = `${dateObject.toLocaleString('default', { month: 'short' })} ${dateObject.getDate()}, ${dateObject.getFullYear()}`;
-
+    let cover = addedGame.cover ? addedGame.cover.image_id : '';
+    let screenshots = addedGame.screenshots ? addedGame.screenshots : '';    
     let config = {
       title: addedGame.name,
       email: this.props.auth0.user.email,
       releaseDate: dateHuman,
-      note: ''
+      note: '',
+      cover: cover,
+      summary: addedGame.summary,
+      platforms: addedGame.platforms,
+      screenshots: screenshots
     }
     try {
       let response = await axios.post(`${server}/gamelist`, config);
-      console.log(response);
-      const newGame = response.data
+      const newGame = response.data;  
       this.setState({
         wishlist: [...this.state.wishlist, newGame]
       });
@@ -205,14 +206,21 @@ class HomePage extends React.Component {
   handleUpdate = async (game) => {
     const { getIdTokenClaims } = this.props.auth0;
     let tokenClaims = await getIdTokenClaims();
-    const jwt = tokenClaims.__raw;
+    const jwt = tokenClaims.__raw;    
+    let screenshots = game.screenshots ? game.screenshots : '';
+    
+
     const config = {
       headers: { authorization: `Bearer ${jwt}` },
       params: {
         title: game.title,
         releaseDate: game.releaseDate,
         email: this.props.auth0.user.email,
-        note: game.note
+        note: game.note,
+        cover: game.cover,
+        summary: game.summary,
+        platforms: game.platforms,
+        screenshots: screenshots
       }
     };
 
