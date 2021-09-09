@@ -8,7 +8,8 @@ import {
   Route,
 } from "react-router-dom";
 import UpcomingLoggedOut from './UpcomingLoggedOut.js';
-import About from './about';
+
+import About from './about.js'
 
 const server = process.env.REACT_APP_SERVER
 

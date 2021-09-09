@@ -5,6 +5,9 @@ import './about.css';
 
 class About extends React.Component {
   render() {
+    const imageLink = () => {
+
+    }
     return (
       <div class="about-page">
         <h1>About the Gaming Odyssey Team</h1>
