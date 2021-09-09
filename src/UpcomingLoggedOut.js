@@ -1,7 +1,27 @@
 import React from "react";
-import { Button, Spinner, ListGroup, Col, Row, InputGroup, Form } from 'react-bootstrap';
+import { Button, Spinner, ListGroup, Col, Row, InputGroup, Form, Image, Carousel, Modal } from 'react-bootstrap';
 
 class UpcomingLoggedOut extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false,
+      carouselItems: []
+    }
+  };
+
+  handleClose = () => {
+    this.setState({
+      showModal: false,
+    })
+  }
+  handleShow = (screenshots) => {
+    this.setState({
+      showModal: true,
+      carouselItems: screenshots
+    })
+  }
 
   render() {
 
@@ -11,6 +31,9 @@ class UpcomingLoggedOut extends React.Component {
       let dateHuman = `${dateObject.toLocaleString('default', { month: 'short' })} ${dateObject.getDate()}, ${dateObject.getFullYear()}`;
       let imgUrl = game.cover ? `https://images.igdb.com/igdb/image/upload/t_cover_small_2x/${game.cover.image_id}.jpg` : 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/nocover_qhhlj6.jpg';
       let platforms = game.platforms.map((platform, idx) => <li className="platformsLi" key={idx}>{platform.name}</li>);
+      let screenshots = game.screenshots ? game.screenshots.map((screenshot, idx) => {
+        return <Carousel.Item key={idx} interval={null}><Image key={idx} className="d-block w-100" alt="screenshot" src={`https://images.igdb.com/igdb/image/upload/t_screenshot_huge/${screenshot.image_id}.jpg`} /></Carousel.Item>
+      }) : "";
 
       return <ListGroup.Item key={idx}>
         <Row className="d-flex justify-content-between" xs="2">
@@ -24,7 +47,7 @@ class UpcomingLoggedOut extends React.Component {
         </Row>
         <Row>
           <Col xs="12" sm="3" md="2" lg="2" xl="2" className="mb-2 text-center" style={{ minWidth: "200px" }}>
-            <img className="mt-2" alt="cover" src={imgUrl} />
+            <Image rounded className="mt-2 d-block" alt="cover" src={imgUrl} onClick={() => this.handleShow(screenshots)} />            
           </Col>
           <Col xs="12" sm="3" md="2" lg="2" xl="2" style={{ minWidth: "fit-content" }}>
             <ul className="platformsUl">
@@ -45,24 +68,14 @@ class UpcomingLoggedOut extends React.Component {
         <h1>Welcome to The Gaming Odyssey</h1>
         <p>Here, you can look through all of the upcoming video games and add them to your personal wish list</p>
         <h6>Please login to see your wish list!</h6>
-        {/* <Form className="search-form" onSubmit={this.props.handleSubmit}>
-          <InputGroup>
-            <Form.Control
-              className="search-input"
-              type="text"
-              placeholder="Search..."
-              name="search"
-              onChange={this.props.handleChange}
-              autoComplete="off"
-            />
-            <InputGroup.Append>
-              <Button type="submit">
-                Search Upcoming
-              </Button>
-            </InputGroup.Append>
-          </InputGroup>
-        </Form> */}
-
+        <Modal size="xl" centered animation={false} show={this.state.showModal} onHide={this.handleClose}>
+          <Modal.Header closeButton />
+          <Modal.Body>
+            <Carousel>
+              {this.state.carouselItems}
+            </Carousel>
+          </Modal.Body>
+        </Modal>
         <Form className="mb-4 mt-4" onSubmit={this.props.handleSubmit}>
           <InputGroup>
             <Form.Control

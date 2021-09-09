@@ -5,6 +5,7 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Auth0Provider } from "@auth0/auth0-react";
 
+// this was taken from Auth0 provider docs
 
 ReactDOM.render(
   <React.StrictMode>

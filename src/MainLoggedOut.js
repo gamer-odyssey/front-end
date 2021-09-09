@@ -9,7 +9,6 @@ import {
 } from "react-router-dom";
 import UpcomingLoggedOut from './UpcomingLoggedOut.js';
 
-
 const server = process.env.REACT_APP_SERVER
 
 class HomePage extends React.Component {
@@ -30,7 +29,6 @@ class HomePage extends React.Component {
     this.setState({
       searchInput: e.target.value
     })
-    console.log(this.state.searchInput)
   }
 
   getComingSoon = async () => {
@@ -46,8 +44,7 @@ class HomePage extends React.Component {
           finishedLoading: true,
           returnedEmptySearch: true
         })
-      }
-      console.log(response.data);
+      };
     } catch (err) {
       console.log(err.message);
     }
@@ -108,10 +105,9 @@ class HomePage extends React.Component {
     }
   }
 
-
   getSearchResults = async () => {
     let todaysDate = Math.floor(Date.now() / 1000);
-    let field = `fields name, summary, platforms.name, first_release_date, cover.image_id; where first_release_date > ${todaysDate}; offset ${this.state.offset}; limit 10; search "${this.state.searchInput}";`;
+    let field = `fields name, summary, screenshots.image_id, platforms.name, first_release_date, cover.image_id; where first_release_date > ${todaysDate}; offset ${this.state.offset}; limit 10; search "${this.state.searchInput}";`;
     try {
       const response = await axios.get(`${server}/search?field=${field}`);
       if (response.data.length > 0) {
@@ -127,7 +123,6 @@ class HomePage extends React.Component {
           returnedEmptySearch: true
         })
       }
-      console.log(response.data);
     } catch (err) {
       console.log(err.message);
     }
@@ -142,8 +137,6 @@ class HomePage extends React.Component {
     })
     this.getComingSoon()
   }
-
-
 
   render() {
     return (
