@@ -1,8 +1,28 @@
 import React from "react";
-import { Button, Spinner, ListGroup, Col, Row, InputGroup, Form } from 'react-bootstrap';
+import { Button, Spinner, ListGroup, Col, Row, InputGroup, Form, Modal, Carousel, Image } from 'react-bootstrap';
 import { withAuth0 } from '@auth0/auth0-react';
 
 class Upcoming extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false,
+      carouselItems: []
+    }
+  };
+
+  handleClose = () => {
+    this.setState({
+      showModal: false,
+    })
+  }
+  handleShow = (screenshots) => {
+    this.setState({
+      showModal: true,
+      carouselItems: screenshots
+    })
+  }
 
   render() {
     const { isAuthenticated } = this.props.auth0;
@@ -13,6 +33,9 @@ class Upcoming extends React.Component {
       let dateHuman = `${dateObject.toLocaleString('default', { month: 'short' })} ${dateObject.getDate()}, ${dateObject.getFullYear()}`;
       let imgUrl = game.cover ? `https://images.igdb.com/igdb/image/upload/t_cover_small_2x/${game.cover.image_id}.jpg` : 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/nocover_qhhlj6.jpg';
       let platforms = game.platforms.map((platform, idx) => <li className="platformsLi" key={idx}>{platform.name}</li>);
+      let screenshots = game.screenshots ? game.screenshots.map((screenshot, idx) => {
+        return <Carousel.Item key={idx} interval={null}><Image key={idx} className="d-block w-100" alt="screenshot" src={`https://images.igdb.com/igdb/image/upload/t_screenshot_huge/${screenshot.image_id}.jpg`} /></Carousel.Item>
+      }) : "";
       let match = this.props.wishlist.filter(wishlistGame => wishlistGame.title === game.name);
 
       return <ListGroup.Item key={idx}>
@@ -32,7 +55,7 @@ class Upcoming extends React.Component {
         </Row>
         <Row>
           <Col xs="12" sm="3" md="2" lg="2" xl="2" className="mb-2 text-center" style={{ minWidth: "200px" }}>
-            <img className="mt-2" alt="cover" src={imgUrl} />
+            <Image rounded className="mt-2 d-block" alt="cover" src={imgUrl} onClick={() => this.handleShow(screenshots)} />
           </Col>
           <Col xs={true} sm="3" md="2" lg="2" xl="2" style={{ minWidth: "fit-content" }}>
             <ul className="platformsUl">
@@ -52,8 +75,15 @@ class Upcoming extends React.Component {
       <>
         <h1>Welcome to The Gaming Odyssey</h1>
         <p>Here, you can look through all of the upcoming video games and add them to your personal wish list</p>
-        {/* <Button onClick={this.getComingSoon} variant="success">Show Upcoming!</Button> */}
 
+        <Modal size="xl" centered animation={false} show={this.state.showModal} onHide={this.handleClose}>
+          <Modal.Header closeButton />
+          <Modal.Body>
+            <Carousel>
+              {this.state.carouselItems}
+            </Carousel>
+          </Modal.Body>
+        </Modal>
         <Form className="mb-4 mt-4" onSubmit={this.props.handleSubmit}>
           <InputGroup>
             <Form.Control

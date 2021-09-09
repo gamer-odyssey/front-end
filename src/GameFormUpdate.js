@@ -10,6 +10,10 @@ class GameFormUpdate extends React.Component {
       releaseDate: this.props.game.releaseDate,
       note: this.props.game.note,
       email: this.props.auth0.user.email,
+      cover: this.props.game.cover,
+      summary: this.props.game.summary,
+      platforms: this.props.game.platforms,
+      screenshots: this.props.game.screenshots
     }
   }
   handleSubmit = (e) => {
@@ -29,7 +33,7 @@ class GameFormUpdate extends React.Component {
         <Form onSubmit={this.handleSubmit}>
           <Form.Label></Form.Label>
           <Form.Group controlId="note">
-            <Form.Control type='text' onChange={this.handleNote} value={this.state.note}/>
+            <Form.Control type='text' onChange={this.handleNote} value={this.state.note} autoComplete="off"/>
           </Form.Group>
           <Button type='submit'>Update</Button>
         </Form>
