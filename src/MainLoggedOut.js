@@ -8,6 +8,7 @@ import {
   Route,
 } from "react-router-dom";
 import UpcomingLoggedOut from './UpcomingLoggedOut.js';
+import About from './about';
 
 const server = process.env.REACT_APP_SERVER
 
@@ -156,7 +157,7 @@ class HomePage extends React.Component {
             />
           </Route>
           <Route exact path="/about-us">
-            <h1>About the Gaming Odyssey Team</h1>
+            <About />
           </Route>
         </Switch>
       </Router>
