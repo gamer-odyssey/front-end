@@ -112,7 +112,7 @@ class UpcomingLoggedOut extends React.Component {
             </div>
           </>
           : this.props.returnedEmptySearch === false
-            ? <div style={{ textAlign: "center" }}><Spinner animation="border" variant="success" /></div>
+            ? <div style={{ textAlign: "center" }}><Spinner animation="border" variant="warning" /></div>
             : <h5>Search returned empty. Check your spelling or search for a different game</h5>}
       </>
     )
