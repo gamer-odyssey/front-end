@@ -24,10 +24,10 @@ class About extends React.Component {
                 <p className="bio-p">Hi, my name is Ayrat Gimranov and I am a software developer. I moved to the US as a college student to pursue a career in healthcare. Most recently I worked as RN at UW Medical Center's cardiac surgery and advanced heart failure unit. I became attracted to project-type work and decided to make a career change into tech where I could use previously gained skills such as critical thinking, ability to function under stress, prioritizing and delegation. My Motto is: "We can change the world"!</p>
               </Card.Text>
               <a href="https://github.com/ayrat-gimranov">
-                <img class="github" src="img/github-mark.png" alt="Link" onClick="" />
+                <img class="github" src="img/github-mark.png" alt="Link"/>
               </a>
-              <a href="https://www.linkedin.com/in/ayrat-gimranov/">
-                <img class="linkedin" src="img/linkedin.png" alt="Link" onClick="" />
+              <a href="https://www.linkedin.com/in/ayrat-gimranov">
+                <img class="linkedin" src="img/linkedin.png" alt="Link"/>
               </a>
             </Card.Body>
           </Carousel.Item>
