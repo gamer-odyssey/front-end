@@ -47,7 +47,7 @@ class UpcomingLoggedOut extends React.Component {
         </Row>
         <Row>
           <Col xs="12" sm="3" md="2" lg="2" xl="2" className="mb-2 text-center" style={{ minWidth: "200px" }}>
-            <Image rounded className="mt-2 d-block" alt="cover" src={imgUrl} onClick={() => this.handleShow(screenshots)} />            
+            <Image rounded className="mt-2 d-block coverimg"  alt="cover" src={imgUrl} onClick={() => this.handleShow(screenshots)} />            
           </Col>
           <Col xs="12" sm="3" md="2" lg="2" xl="2" style={{ minWidth: "fit-content" }}>
             <ul className="platformsUl">

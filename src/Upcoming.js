@@ -75,6 +75,7 @@ class Upcoming extends React.Component {
       <>
         <h1>Welcome to The Gaming Odyssey</h1>
         <p>Here, you can look through all of the upcoming video games and add them to your personal wish list</p>
+        <p>Click the cover image to view available screenshots</p>
 
         <Modal size="xl" centered animation={false} show={this.state.showModal} onHide={this.handleClose}>
           <Modal.Header closeButton />
