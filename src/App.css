@@ -65,6 +65,12 @@
   justify-content: space-between; 
 }
 
+.coverimg{
+  transition: .5s ease;
+}
+
 .coverimg:hover{
   cursor: pointer;
+  opacity: 0.7;
+  transition: .5s ease;
 }

@@ -66,7 +66,10 @@ class UpcomingLoggedOut extends React.Component {
     return (
       <>
         <h1>Welcome to The Gaming Odyssey</h1>
-        <p>Here, you can look through all of the upcoming video games and add them to your personal wish list</p>
+        <p>Here, you can look through all of the upcoming video games and add them to your personal wish list <br />
+        Checkout upcoming game screenshots by clicking on its cover <br />
+        Search upcoming games by name
+        </p>
         <h6>Please login to see your wish list!</h6>
         <Modal size="xl" centered animation={false} show={this.state.showModal} onHide={this.handleClose}>
           <Modal.Header closeButton />

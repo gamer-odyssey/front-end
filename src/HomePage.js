@@ -91,7 +91,6 @@ class HomePage extends React.Component {
     };
     try {
       let response = await axios.get(`${server}/gamelist`, config);
-      console.log(response.data); 
       this.setState({
         wishlist: response.data
       })
@@ -182,7 +181,7 @@ class HomePage extends React.Component {
         wishlist: [...this.state.wishlist, newGame]
       });
     } catch (error) {
-      console.log(error.response);
+      console.log(error.message);
     }
   }
 
@@ -199,7 +198,7 @@ class HomePage extends React.Component {
       let remainingGames = this.state.wishlist.filter(game => game._id !== id);
       this.setState({ wishlist: remainingGames });
     } catch (err) {
-      console.log(err.response);
+      console.log(err.message);
     }
   }
 

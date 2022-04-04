@@ -43,17 +43,17 @@ class Wishlist extends React.Component {
   render() { 
     let wishlistToRender = this.props.wishlist.map((game, idx) => {
       let imgUrl = game.cover ? `https://images.igdb.com/igdb/image/upload/t_thumb/${game.cover}.jpg` : 'https://images.igdb.com/igdb/image/upload/t_thumb/nocover_qhhlj6.jpg';
-      console.log(game);
+ 
       let screenshots = game.screenshots ? game.screenshots.map((screenshot, idx) => {
         return <Carousel.Item key={idx} interval={null}><Image key={idx} className="d-block w-100" alt="screenshot" src={`https://images.igdb.com/igdb/image/upload/t_screenshot_huge/${screenshot.image_id}.jpg`} /></Carousel.Item>
       }) : "";
-      console.log(screenshots);
+   
       let platforms = game.platforms.map((platform, idx) => platform.name).join(' -- ')
 
       return <Card key={game._id}>
         <Card.Header className="d-flex justify-content-between">
           <div className="d-flex align-items-center">
-            <Image className="mr-3" thumbnail alt="cover" src={imgUrl} onClick={() => this.handleShowModalTwo(screenshots)} />
+            <Image className="mr-3 coverimg" thumbnail alt="cover" src={imgUrl} onClick={() => this.handleShowModalTwo(screenshots)} />
             <div>
               <Accordion.Toggle className="p-0" as={Button} variant="link" eventKey={game._id}>
                 <h4>{game.title}</h4>
@@ -84,11 +84,14 @@ class Wishlist extends React.Component {
     return (
       <>
         <h1 className="text-center m-3">My Wish List</h1>
+        <p className="text-center m-3">Click on the thumbnail to see screenshots <br /> Click on the title to view details and add comments</p>
+        {wishlistToRender.length ?
         <Accordion>
           {wishlistToRender}
         </Accordion>
+        : <p className="text-center m-3"> Wish list is empty. Save games from <a href='/'>Home</a> page to your wish list.</p>}
         <Modal size="xl" show={this.state.showModalTwo} onHide={this.handleCloseModalTwo}>
-          <Modal.Header closeButton>Screenshots
+          <Modal.Header closeButton>SCREENSHOTS
           </Modal.Header>
           <Modal.Body>
             <Carousel>

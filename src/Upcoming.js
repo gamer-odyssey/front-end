@@ -55,7 +55,7 @@ class Upcoming extends React.Component {
         </Row>
         <Row>
           <Col xs="12" sm="3" md="2" lg="2" xl="2" className="mb-2 text-center" style={{ minWidth: "200px" }}>
-            <Image rounded className="mt-2 d-block" alt="cover" src={imgUrl} onClick={() => this.handleShow(screenshots)} />
+            <Image rounded className="mt-2 d-block coverimg" alt="cover" src={imgUrl} onClick={() => this.handleShow(screenshots)} />
           </Col>
           <Col xs={true} sm="3" md="2" lg="2" xl="2" style={{ minWidth: "fit-content" }}>
             <ul className="platformsUl">
@@ -73,12 +73,12 @@ class Upcoming extends React.Component {
 
     return (
       <>
-        <h1>Welcome to The Gaming Odyssey</h1>
-        <p>Here, you can look through all of the upcoming video games and add them to your personal wish list</p>
-        <p>Click the cover image to view available screenshots</p>
+        <h1>Welcome to The Gamer Odyssey!</h1>
+        <p>See info about upcoming video games sorted by date. <br /> Checkout out game screenshots by clicking the thumbnail</p>
+        <p>Found something you like? Sign in and add it to your personal wish list</p>
 
         <Modal size="xl" centered animation={false} show={this.state.showModal} onHide={this.handleClose}>
-          <Modal.Header closeButton />
+          <Modal.Header closeButton >SCREENSHOTS </Modal.Header>
           <Modal.Body>
             <Carousel>
               {this.state.carouselItems}
