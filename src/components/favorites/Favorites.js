@@ -1,14 +1,13 @@
-import './Wishlist.css';
+import './Favorites.css';
 import React from 'react';
 import { Accordion, Card, Button, Modal, Image, Carousel } from 'react-bootstrap';
 import { withAuth0 } from '@auth0/auth0-react';
-import GameFormUpdate from './GameFormUpdate';
+import GameFormUpdate from '../GameFormUpdate';
 
 class Wishlist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // wishlist: this.props.wishlist,
       showModal: false,
       selectedGame: null,
       showModalTwo: false,
@@ -83,13 +82,13 @@ class Wishlist extends React.Component {
 
     return (
       <>
-        <h1 className="text-center m-3">My Wish List</h1>
-        <p className="text-center m-3">Click on the thumbnail to see screenshots <br /> Click on the title to view details and add comments</p>
+        <h1 className="text-center m-3">My Favorite Games</h1>
+        <p className="text-center m-3">Click on the Thumbnail to See Screenshots <br /> Click on the Title to View Details and Add Comments</p>
         {wishlistToRender.length ?
         <Accordion>
           {wishlistToRender}
         </Accordion>
-        : <p className="text-center m-3"> Wish list is empty. Save games from <a href='/'>Home</a> page to your wish list.</p>}
+        : <p className="text-center m-3"> Favorite collection is empty. Save games from <a href='/'>Home</a> page to your favorites.</p>}
         <Modal size="xl" show={this.state.showModalTwo} onHide={this.handleCloseModalTwo}>
           <Modal.Header closeButton>SCREENSHOTS
           </Modal.Header>
@@ -100,7 +99,7 @@ class Wishlist extends React.Component {
           </Modal.Body>
         </Modal>
         <Modal show={this.state.showModal} onHide={this.handleClose}>
-          <Modal.Header closeButton><h2>Update a Game Note</h2>
+          <Modal.Header closeButton><h2>Update a Comment</h2>
           </Modal.Header>
           <Modal.Body>
             {

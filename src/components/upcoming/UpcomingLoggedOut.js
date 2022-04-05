@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, Spinner, ListGroup, Col, Row, InputGroup, Form, Modal, Carousel, Image } from 'react-bootstrap';
-import { withAuth0 } from '@auth0/auth0-react';
+import { Button, Spinner, ListGroup, Col, Row, InputGroup, Form, Image, Carousel, Modal } from 'react-bootstrap';
 
-class Upcoming extends React.Component {
+class UpcomingLoggedOut extends React.Component {
 
   constructor(props) {
     super(props);
@@ -25,7 +24,6 @@ class Upcoming extends React.Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props.auth0;
 
     let comingSoonToRender = this.props.comingSoon.map((game, idx) => {
       let timestamp = game.first_release_date * 1000;
@@ -36,7 +34,6 @@ class Upcoming extends React.Component {
       let screenshots = game.screenshots ? game.screenshots.map((screenshot, idx) => {
         return <Carousel.Item key={idx} interval={null}><Image key={idx} className="d-block w-100" alt="screenshot" src={`https://images.igdb.com/igdb/image/upload/t_screenshot_huge/${screenshot.image_id}.jpg`} /></Carousel.Item>
       }) : "";
-      let match = this.props.wishlist.filter(wishlistGame => wishlistGame.title === game.name);
 
       return <ListGroup.Item key={idx}>
         <Row className="d-flex justify-content-between" xs="2">
@@ -44,20 +41,15 @@ class Upcoming extends React.Component {
             <h4>{game.name}</h4>
             <p>Release date: {dateHuman}</p>
           </Col>
-          <Col xs="auto" sm="auto" md="auto" lg="auto" xl="auto">{isAuthenticated ?
-            <>
-              {match.length > 0 ?
-                <Button variant="link" disabled>In your wishlist</Button>
-                : <Button variant="outline-success" onClick={() => this.props.handleNewGame(game)}>Add to wishlist</Button>}
-            </>
-            : <Button variant="link" disabled>Sign in to add to wishlist</Button>}
+          <Col xs="auto" sm="auto" md="auto" lg="auto" xl="auto">
+            <Button variant="link" disabled>Sign in to Add to Favorites</Button>
           </Col>
         </Row>
         <Row>
           <Col xs="12" sm="3" md="2" lg="2" xl="2" className="mb-2 text-center" style={{ minWidth: "200px" }}>
-            <Image rounded className="mt-2 d-block coverimg" alt="cover" src={imgUrl} onClick={() => this.handleShow(screenshots)} />
+            <Image rounded className="mt-2 d-block coverimg"  alt="cover" src={imgUrl} onClick={() => this.handleShow(screenshots)} />            
           </Col>
-          <Col xs={true} sm="3" md="2" lg="2" xl="2" style={{ minWidth: "fit-content" }}>
+          <Col xs="12" sm="3" md="2" lg="2" xl="2" style={{ minWidth: "fit-content" }}>
             <ul className="platformsUl">
               <h5>Platforms</h5>
               {platforms}
@@ -73,12 +65,11 @@ class Upcoming extends React.Component {
 
     return (
       <>
-        <h1>Welcome to The Gamer Odyssey!</h1>
-        <p>See info about upcoming video games sorted by date. <br /> Checkout out game screenshots by clicking the thumbnail</p>
-        <p>Found something you like? Sign in and add it to your personal wish list</p>
-
+        <h1>Welcome to The Gaming Odyssey</h1>
+        <p>Checkout upcoming video games sorted by date. <br />To see screenshots, click on the image.</p>
+        <h6>Log in and save games to your favorites!</h6>
         <Modal size="xl" centered animation={false} show={this.state.showModal} onHide={this.handleClose}>
-          <Modal.Header closeButton >SCREENSHOTS </Modal.Header>
+          <Modal.Header closeButton />
           <Modal.Body>
             <Carousel>
               {this.state.carouselItems}
@@ -115,18 +106,17 @@ class Upcoming extends React.Component {
               {comingSoonToRender}
             </ListGroup>
             <div className="text-right">
-              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.previousPage} disabled={this.props.offset > 0 ? false : true} >Previous Page</Button>
+              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.previousPage} disabled={this.props.offset > 0 ? false : true}>Previous Page</Button>
               {' '}
-              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.nextPage}>Next Page</Button>
+              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.nextPage} disabled={this.props.comingSoon.length < 10 ? true : false}>Next Page</Button>
             </div>
           </>
           : this.props.returnedEmptySearch === false
-            ? <div style={{ textAlign: "center" }}><Spinner animation="border" variant="success" /></div>
+            ? <div style={{ textAlign: "center" }}><Spinner animation="border" variant="warning" /></div>
             : <h5>Search returned empty. Check your spelling or search for a different game</h5>}
       </>
     )
   }
 }
 
-export default withAuth0(Upcoming);
-
+export default UpcomingLoggedOut;

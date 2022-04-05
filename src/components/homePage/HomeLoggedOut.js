@@ -1,16 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import Wishlist from './Wishlist.js';
-import Profile from './Profile';
 import { withAuth0 } from '@auth0/auth0-react';
-import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import Upcoming from './Upcoming.js';
-import About from './about.js';
+import UpcomingLoggedOut from '../upcoming/UpcomingLoggedOut.js';
+import About from '../aboutUs/about.js'
 
 const server = process.env.REACT_APP_SERVER
 
@@ -20,7 +17,6 @@ class HomePage extends React.Component {
     super(props);
     this.state = {
       comingSoon: [],
-      wishlist: [],
       offset: 0,
       finishedLoading: false,
       returnedEmptySearch: false,
@@ -32,13 +28,12 @@ class HomePage extends React.Component {
   handleChange = (e) => {
     this.setState({
       searchInput: e.target.value
-    })    
+    })
   }
 
   getComingSoon = async () => {
     try {
       const response = await axios.get(`${server}/coming_soon?offset=${this.state.offset}`);
-
       if (response.data.length > 0) {
         this.setState({
           comingSoon: response.data,
@@ -49,7 +44,7 @@ class HomePage extends React.Component {
           finishedLoading: true,
           returnedEmptySearch: true
         })
-      }
+      };
     } catch (err) {
       console.log(err.message);
     }
@@ -81,22 +76,7 @@ class HomePage extends React.Component {
     window.scrollTo(0, 0);
   }
 
-  componentDidMount = async () => {
-    const { getIdTokenClaims } = this.props.auth0;
-    let tokenClaims = await getIdTokenClaims();
-    const jwt = tokenClaims.__raw;
-    const config = {
-      headers: { authorization: `Bearer ${jwt}` },
-      params: { email: this.props.auth0.user.email },
-    };
-    try {
-      let response = await axios.get(`${server}/gamelist`, config);
-      this.setState({
-        wishlist: response.data
-      })
-    } catch (error) {
-      console.log(error.response);
-    }
+  componentDidMount = () => {
     if (this.state.showOnlySearchResults) {
       this.getSearchResults();
     } else {
@@ -158,92 +138,12 @@ class HomePage extends React.Component {
     this.getComingSoon()
   }
 
-  handleNewGame = async (addedGame) => {
-    let timestamp = addedGame.first_release_date * 1000;
-    let dateObject = new Date(timestamp);
-    let dateHuman = `${dateObject.toLocaleString('default', { month: 'short' })} ${dateObject.getDate()}, ${dateObject.getFullYear()}`;
-    let cover = addedGame.cover ? addedGame.cover.image_id : '';
-    let screenshots = addedGame.screenshots ? addedGame.screenshots : '';    
-    let config = {
-      title: addedGame.name,
-      email: this.props.auth0.user.email,
-      releaseDate: dateHuman,
-      note: '',
-      cover: cover,
-      summary: addedGame.summary,
-      platforms: addedGame.platforms,
-      screenshots: screenshots
-    }
-    try {
-      let response = await axios.post(`${server}/gamelist`, config);
-      const newGame = response.data;  
-      this.setState({
-        wishlist: [...this.state.wishlist, newGame]
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
-  handleDelete = async (id) => {
-    try {
-      const { getIdTokenClaims } = this.props.auth0;
-      let tokenClaims = await getIdTokenClaims();
-      const jwt = tokenClaims.__raw;
-      const config = {
-        headers: { "Authorization": `Bearer ${jwt}` },
-        params: { email: this.props.auth0.user.email },
-      };
-      await axios.delete(`${server}/gamelist/${id}`, config);
-      let remainingGames = this.state.wishlist.filter(game => game._id !== id);
-      this.setState({ wishlist: remainingGames });
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
-
-  handleUpdate = async (game) => {
-    const { getIdTokenClaims } = this.props.auth0;
-    let tokenClaims = await getIdTokenClaims();
-    const jwt = tokenClaims.__raw;    
-    let screenshots = game.screenshots ? game.screenshots : '';
-    
-
-    const config = {
-      headers: { authorization: `Bearer ${jwt}` },
-      params: {
-        title: game.title,
-        releaseDate: game.releaseDate,
-        email: this.props.auth0.user.email,
-        note: game.note,
-        cover: game.cover,
-        summary: game.summary,
-        platforms: game.platforms,
-        screenshots: screenshots
-      }
-    };
-
-    try {
-      await axios.put(`${server}/gamelist/${game._id}`, config);
-      const updateWishList = this.state.wishlist.map(stateGame => {
-        if (stateGame._id === game._id) {
-          return game
-        } else {
-          return stateGame;
-        }
-      });
-      this.setState({ wishlist: updateWishList });
-    } catch (error) {
-      console.log(error.response);
-    }
-  }
-
   render() {
     return (
       <Router>
         <Switch>
           <Route exact path="/">
-            <Upcoming
+            <UpcomingLoggedOut
               comingSoon={this.state.comingSoon}
               offset={this.state.offset}
               finishedLoading={this.state.finishedLoading}
@@ -253,22 +153,16 @@ class HomePage extends React.Component {
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
               handleShowAll={this.handleShowAll}
-              wishlist={this.state.wishlist}
-              handleNewGame={this.handleNewGame}
             />
           </Route>
           <Route exact path="/about-us">
             <About />
           </Route>
           <Route exact path="/odyssey">
-            <Wishlist
-              wishlist={this.state.wishlist}
-              handleDelete={this.handleDelete}
-              handleUpdate={this.handleUpdate}
-            />
+            <h3 className="text-center m-3"><br />Log in to See Your Favorite Games</h3>
           </Route>
           <Route exact path="/profile">
-            <Profile />
+            <h3 className="text-center m-3"><br />Log in to See Your Profile Info</h3>
           </Route>
         </Switch>
       </Router>

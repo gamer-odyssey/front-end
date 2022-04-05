@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, Spinner, ListGroup, Col, Row, InputGroup, Form, Image, Carousel, Modal } from 'react-bootstrap';
+import { Button, Spinner, ListGroup, Col, Row, InputGroup, Form, Modal, Carousel, Image } from 'react-bootstrap';
+import { withAuth0 } from '@auth0/auth0-react';
 
-class UpcomingLoggedOut extends React.Component {
+class Upcoming extends React.Component {
 
   constructor(props) {
     super(props);
@@ -16,14 +17,17 @@ class UpcomingLoggedOut extends React.Component {
       showModal: false,
     })
   }
-  handleShow = (screenshots) => {
+  handleShow = (screenshots, name, date) => {
     this.setState({
       showModal: true,
-      carouselItems: screenshots
+      carouselItems: screenshots,
+      selectedGameName: name,
+      selectedGameReleaseDate: date
     })
   }
 
   render() {
+    const { isAuthenticated } = this.props.auth0;
 
     let comingSoonToRender = this.props.comingSoon.map((game, idx) => {
       let timestamp = game.first_release_date * 1000;
@@ -34,6 +38,7 @@ class UpcomingLoggedOut extends React.Component {
       let screenshots = game.screenshots ? game.screenshots.map((screenshot, idx) => {
         return <Carousel.Item key={idx} interval={null}><Image key={idx} className="d-block w-100" alt="screenshot" src={`https://images.igdb.com/igdb/image/upload/t_screenshot_huge/${screenshot.image_id}.jpg`} /></Carousel.Item>
       }) : "";
+      let match = this.props.wishlist.filter(wishlistGame => wishlistGame.title === game.name);
 
       return <ListGroup.Item key={idx}>
         <Row className="d-flex justify-content-between" xs="2">
@@ -41,15 +46,20 @@ class UpcomingLoggedOut extends React.Component {
             <h4>{game.name}</h4>
             <p>Release date: {dateHuman}</p>
           </Col>
-          <Col xs="auto" sm="auto" md="auto" lg="auto" xl="auto">
-            <Button variant="link" disabled>Sign in to add to wishlist</Button>
+          <Col xs="auto" sm="auto" md="auto" lg="auto" xl="auto">{isAuthenticated ?
+            <>
+              {match.length > 0 ?
+                <Button variant="link" disabled>In your wishlist</Button>
+                : <Button variant="outline-success" onClick={() => this.props.handleNewGame(game)}>Add to wishlist</Button>}
+            </>
+            : <Button variant="link" disabled>Sign in to add to wishlist</Button>}
           </Col>
         </Row>
         <Row>
           <Col xs="12" sm="3" md="2" lg="2" xl="2" className="mb-2 text-center" style={{ minWidth: "200px" }}>
-            <Image rounded className="mt-2 d-block coverimg"  alt="cover" src={imgUrl} onClick={() => this.handleShow(screenshots)} />            
+            <Image rounded className="mt-2 d-block coverimg" alt="cover" src={imgUrl} onClick={() => this.handleShow(screenshots, game.name, dateHuman)} />
           </Col>
-          <Col xs="12" sm="3" md="2" lg="2" xl="2" style={{ minWidth: "fit-content" }}>
+          <Col xs={true} sm="3" md="2" lg="2" xl="2" style={{ minWidth: "fit-content" }}>
             <ul className="platformsUl">
               <h5>Platforms</h5>
               {platforms}
@@ -65,17 +75,13 @@ class UpcomingLoggedOut extends React.Component {
 
     return (
       <>
-        <h1>Welcome to The Gaming Odyssey</h1>
-        <p>Here, you can look through all of the upcoming video games and add them to your personal wish list <br />
-        Checkout upcoming game screenshots by clicking on its cover <br />
-        Search upcoming games by name
-        </p>
-        <h6>Please login to see your wish list!</h6>
+        <h1>Welcome to The Gamer Odyssey!</h1>
+        <p>Checkout upcoming video games sorted by date. <br />To see screenshots, click on the image.</p>
         <Modal size="xl" centered animation={false} show={this.state.showModal} onHide={this.handleClose}>
-          <Modal.Header closeButton />
+          <Modal.Header closeButton >{this.state.selectedGameName} ({this.state.selectedGameReleaseDate})</Modal.Header>
           <Modal.Body>
             <Carousel>
-              {this.state.carouselItems}
+              {this.state.carouselItems.length ? this.state.carouselItems : <p>No Screenshots Available</p>}
             </Carousel>
           </Modal.Body>
         </Modal>
@@ -109,17 +115,18 @@ class UpcomingLoggedOut extends React.Component {
               {comingSoonToRender}
             </ListGroup>
             <div className="text-right">
-              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.previousPage} disabled={this.props.offset > 0 ? false : true}>Previous Page</Button>
+              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.previousPage} disabled={this.props.offset > 0 ? false : true} >Previous Page</Button>
               {' '}
-              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.nextPage} disabled={this.props.comingSoon.length < 10 ? true : false}>Next Page</Button>
+              <Button variant="link" style={{ marginBottom: "5px" }} onClick={this.props.nextPage}>Next Page</Button>
             </div>
           </>
           : this.props.returnedEmptySearch === false
-            ? <div style={{ textAlign: "center" }}><Spinner animation="border" variant="warning" /></div>
+            ? <div style={{ textAlign: "center" }}><Spinner animation="border" variant="success" /></div>
             : <h5>Search returned empty. Check your spelling or search for a different game</h5>}
       </>
     )
   }
 }
 
-export default UpcomingLoggedOut;
+export default withAuth0(Upcoming);
+
