@@ -16,10 +16,12 @@ class UpcomingLoggedOut extends React.Component {
       showModal: false,
     })
   }
-  handleShow = (screenshots) => {
+  handleShow = (screenshots, name, date) => {
     this.setState({
       showModal: true,
-      carouselItems: screenshots
+      carouselItems: screenshots,
+      selectedGameName: name,
+      selectedGameReleaseDate: date
     })
   }
 
@@ -47,7 +49,7 @@ class UpcomingLoggedOut extends React.Component {
         </Row>
         <Row>
           <Col xs="12" sm="3" md="2" lg="2" xl="2" className="mb-2 text-center" style={{ minWidth: "200px" }}>
-            <Image rounded className="mt-2 d-block coverimg"  alt="cover" src={imgUrl} onClick={() => this.handleShow(screenshots)} />            
+            <Image rounded className="mt-2 d-block coverimg"  alt="cover" src={imgUrl} onClick={() => this.handleShow(screenshots, game.name, dateHuman)} />            
           </Col>
           <Col xs="12" sm="3" md="2" lg="2" xl="2" style={{ minWidth: "fit-content" }}>
             <ul className="platformsUl">
@@ -69,10 +71,10 @@ class UpcomingLoggedOut extends React.Component {
         <p>Checkout upcoming video games sorted by date. <br />To see screenshots, click on the image.</p>
         <h6>Log in and save games to your favorites!</h6>
         <Modal size="xl" centered animation={false} show={this.state.showModal} onHide={this.handleClose}>
-          <Modal.Header closeButton />
+        <Modal.Header closeButton >{this.state.selectedGameName} ({this.state.selectedGameReleaseDate})</Modal.Header>
           <Modal.Body>
             <Carousel>
-              {this.state.carouselItems}
+            {this.state.carouselItems.length ? this.state.carouselItems : <p>No Screenshots Available</p>}
             </Carousel>
           </Modal.Body>
         </Modal>
