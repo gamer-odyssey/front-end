@@ -1,0 +1,41 @@
+.bio-image {
+  height: 300px;
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bio-p {
+ text-align: right;
+ color: white;
+}
+
+.about-page {
+  background-color: #6c757d;
+  color: white;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.links{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.social-logo-a {
+  margin: 0.5rem;
+  
+}
+.github {
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+}
+
+.linkedin {
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+}

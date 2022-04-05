@@ -42,7 +42,7 @@ class UpcomingLoggedOut extends React.Component {
             <p>Release date: {dateHuman}</p>
           </Col>
           <Col xs="auto" sm="auto" md="auto" lg="auto" xl="auto">
-            <Button variant="link" disabled>Sign in to add to wishlist</Button>
+            <Button variant="link" disabled>Sign in to Add to Favorites</Button>
           </Col>
         </Row>
         <Row>
@@ -66,8 +66,8 @@ class UpcomingLoggedOut extends React.Component {
     return (
       <>
         <h1>Welcome to The Gaming Odyssey</h1>
-        <p>Here, you can look through all of the upcoming video games and add them to your personal wish list</p>
-        <h6>Please login to see your wish list!</h6>
+        <p>Checkout upcoming video games sorted by date. <br />To see screenshots, click on the image.</p>
+        <h6>Log in and save games to your favorites!</h6>
         <Modal size="xl" centered animation={false} show={this.state.showModal} onHide={this.handleClose}>
           <Modal.Header closeButton />
           <Modal.Body>

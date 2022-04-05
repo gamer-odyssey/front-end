@@ -1,15 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import { withAuth0 } from '@auth0/auth0-react';
-import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import UpcomingLoggedOut from './UpcomingLoggedOut.js';
-
-import About from './about.js'
+import UpcomingLoggedOut from '../upcoming/UpcomingLoggedOut.js';
+import About from '../aboutUs/about.js'
 
 const server = process.env.REACT_APP_SERVER
 
@@ -159,6 +157,12 @@ class HomePage extends React.Component {
           </Route>
           <Route exact path="/about-us">
             <About />
+          </Route>
+          <Route exact path="/odyssey">
+            <h3 className="text-center m-3"><br />Log in to See Your Favorite Games</h3>
+          </Route>
+          <Route exact path="/profile">
+            <h3 className="text-center m-3"><br />Log in to See Your Profile Info</h3>
           </Route>
         </Switch>
       </Router>

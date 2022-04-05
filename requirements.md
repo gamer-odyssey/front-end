@@ -26,7 +26,7 @@ Users will not be able to buy games from our web app.
 
 1. Users can log in into the apps using their Gmail accounts.
 2. Users can search for the upcoming video games.
-3. Users can select and save games to their wish list.
+3. Users can select and save games to their favorites list.
 4. Users can add and update personal notes for the games.
 5. Users can delete games from the list.
 

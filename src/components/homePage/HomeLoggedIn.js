@@ -1,16 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-import Wishlist from './Wishlist.js';
-import Profile from './Profile';
 import { withAuth0 } from '@auth0/auth0-react';
-import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import Upcoming from './Upcoming.js';
-import About from './about.js';
+import UpcomingLoggedIn from '../upcoming/UpcomingLoggedIn.js';
+import About from '../aboutUs/about.js';
+import Wishlist from '../favorites/Favorites.js';
+import Profile from '../profile/Profile';
 
 const server = process.env.REACT_APP_SERVER
 
@@ -20,12 +19,12 @@ class HomePage extends React.Component {
     super(props);
     this.state = {
       comingSoon: [],
-      wishlist: [],
       offset: 0,
       finishedLoading: false,
       returnedEmptySearch: false,
       searchInput: '',
-      showOnlySearchResults: false
+      showOnlySearchResults: false,
+      wishlist: []
     }
   };
 
@@ -91,7 +90,6 @@ class HomePage extends React.Component {
     };
     try {
       let response = await axios.get(`${server}/gamelist`, config);
-      console.log(response.data); 
       this.setState({
         wishlist: response.data
       })
@@ -182,7 +180,7 @@ class HomePage extends React.Component {
         wishlist: [...this.state.wishlist, newGame]
       });
     } catch (error) {
-      console.log(error.response);
+      console.log(error.message);
     }
   }
 
@@ -199,7 +197,7 @@ class HomePage extends React.Component {
       let remainingGames = this.state.wishlist.filter(game => game._id !== id);
       this.setState({ wishlist: remainingGames });
     } catch (err) {
-      console.log(err.response);
+      console.log(err.message);
     }
   }
 
@@ -244,7 +242,7 @@ class HomePage extends React.Component {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Upcoming
+            <UpcomingLoggedIn
               comingSoon={this.state.comingSoon}
               offset={this.state.offset}
               finishedLoading={this.state.finishedLoading}
